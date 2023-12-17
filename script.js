@@ -100,7 +100,7 @@ if (input < 8 || input > 128) {
     alert('Password length must be at least 8 characters but no more than 128. Refresh to try again.')}
     else if (isNaN(input)) {
         alert('Password length must be provided as a number. Refresh to try again.')}
-    else {
+    else { // password generation logic starts here
         if (confirm('Click Ok to confirm including special characters.')) {
         getPasswordOptions(specialCharacters)
         }
@@ -109,24 +109,25 @@ if (input < 8 || input > 128) {
         }
         if (confirm('Click Ok to confirm including uppercase characters.')) {
             getPasswordOptions(upperCasedCharacters)
+        };
+        alert('Your password is now created. Please click "Generate Password"!');
+            
+        // Function for getting a random element from an array
+        function getRandom(array) {
+            var password = ''
+        for (i = 0; i < input; i++) {
+            var char = Math.floor(Math.random() * mychoice.length);
+            password += array[char]
         }
-    }
-// Function for getting a random element from an array
-function getRandom(array) {
-    var password = ''
-for (i = 0; i < input; i++) {
-    var char = Math.floor(Math.random() * mychoice.length);
-    password += array[char]
-}
-return password
-}
+        return password
+        }
 
 
-// Function to generate password with user input
-alert('Your password is now created. Please click "Generate Password"!')
-function generatePassword() {
-    return getRandom(mychoice)
-}
+        // Function to generate password with user input
+        function generatePassword() {
+            return getRandom(mychoice)
+        }
+        } // conditions end here so password won't generate if conditions are not met - there will be error
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
