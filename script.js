@@ -89,11 +89,11 @@ var upperCasedCharacters = [
 ];
 
 var mychoice = lowerCasedCharacters
-
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
 // Function to prompt user for password options
-function getPasswordOptions(option) {
-    return mychoice.push(...option) 
-}
+function getPasswordOptions(array) {
+   
 // Set up error messages to stick to the logic
 const input = prompt("How many characters would you like your password to contain?")
 if (input < 8 || input > 128) {
@@ -102,35 +102,35 @@ if (input < 8 || input > 128) {
         alert('Password length must be provided as a number. Refresh to try again.')}
     else { // password generation logic starts here
         if (confirm('Click Ok to confirm including special characters.')) {
-        getPasswordOptions(specialCharacters)
+        mychoice.push(...specialCharacters)
         }
         if (confirm('Click Ok to confirm including numeric characters.')) {
-            getPasswordOptions(numericCharacters)
+          mychoice.push(...numericCharacters)
         }
         if (confirm('Click Ok to confirm including uppercase characters.')) {
-            getPasswordOptions(upperCasedCharacters)
+          mychoice.push(...upperCasedCharacters)
         };
         alert('Your password is now created. Please click "Generate Password"!');
-            
+        }    
         // Function for getting a random element from an array
-        function getRandom(array) {
+        
             var password = ''
         for (i = 0; i < input; i++) {
             var char = Math.floor(Math.random() * mychoice.length);
             password += array[char]
         }
         return password
-        }
-
+       
+        
+}
 
         // Function to generate password with user input
         function generatePassword() {
-            return getRandom(mychoice)
+            return getPasswordOptions(mychoice)
         }
-        } // conditions end here so password won't generate if conditions are not met - there will be error
+         // conditions end here so password won't generate if conditions are not met - there will be error
 
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
+
 
 // Write password to the #password input
 function writePassword() {
