@@ -88,7 +88,7 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var mychoice = lowerCasedCharacters
+var mychoice = []
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 // Function to prompt user for password options
@@ -100,18 +100,34 @@ if (input < 8 || input > 128) {
     alert('Password length must be at least 8 characters but no more than 128. Refresh to try again.')}
     else if (isNaN(input)) {
         alert('Password length must be provided as a number. Refresh to try again.')}
-    else { // password generation logic starts here
+   
+        else {
+          confirm('Your password length: ' + input + ' digits.')
+          // password generation logic starts here
         if (confirm('Click Ok to confirm including special characters.')) {
-        mychoice.push(...specialCharacters)
+        mychoice.push(...specialCharacters);
+        alert('Your password will include special characters.')
         }
         if (confirm('Click Ok to confirm including numeric characters.')) {
-          mychoice.push(...numericCharacters)
+          mychoice.push(...numericCharacters);
+          alert('Your password will include numeric characters.')
         }
         if (confirm('Click Ok to confirm including uppercase characters.')) {
-          mychoice.push(...upperCasedCharacters)
-        };
-        alert('Your password is now created. Please click "Generate Password"!');
-        }    
+          mychoice.push(...upperCasedCharacters);
+          alert('Your password will include uppercase characters.')
+        }
+        if (confirm('Click Ok to confirm including lowercase characters.')) {
+          mychoice.push(...lowerCasedCharacters);
+          alert('Your password will include lowercase characters')
+        }
+       
+        
+      };
+      if (mychoice.length == 0) {
+        alert('Your password should at least include one character type!');
+    }
+        
+      
         // Function for getting a random element from an array
         
             var password = ''
@@ -143,3 +159,11 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', writePassword);
+
+// Add reset button so they can generate a new one and reset the criteria
+var resetBtn = document.querySelector('#clear')
+resetBtn.addEventListener('click', function() {
+  mychoice = [];
+  var textarea = document.querySelector('textarea');
+  textarea.value = ''
+})
